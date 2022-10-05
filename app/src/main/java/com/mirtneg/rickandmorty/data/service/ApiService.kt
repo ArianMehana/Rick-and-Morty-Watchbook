@@ -8,6 +8,7 @@ import retrofit2.http.GET
 import retrofit2.Call
 import retrofit2.http.Path
 import retrofit2.http.Query
+import retrofit2.http.Url
 
 interface ApiService {
 
@@ -25,6 +26,9 @@ interface ApiService {
 
     @GET("/api/character/{characters}")
     fun getCharactersPerEpisode(@Path("characters") characterId: String): Call<List<Character>>
+
+    @GET
+    fun filterCharacters(@Url url:String): Call<CharacterResponse>
 
 
 }

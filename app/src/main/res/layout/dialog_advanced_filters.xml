@@ -43,6 +43,7 @@
             app:layout_constraintTop_toBottomOf="@id/closeButton">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/speciesInputEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawablePadding="10dp"
@@ -62,6 +63,7 @@
             app:layout_constraintTop_toBottomOf="@id/speciesInput">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/genderInputEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawablePadding="10dp"
@@ -82,6 +84,7 @@
             app:layout_constraintTop_toBottomOf="@id/genderInput">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/statusInputEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawablePadding="10dp"
