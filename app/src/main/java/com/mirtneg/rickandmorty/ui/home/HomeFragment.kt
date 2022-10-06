@@ -27,11 +27,9 @@ class HomeFragment : Fragment() {
 
     lateinit var adapter : CharactersAdapter
 
-    lateinit var dialogBinding: DialogAdvancedFiltersBinding
-
-    //lateinit var epAdapter : EpisodesAdapter
-
     lateinit var dialog: Dialog
+
+    lateinit var dialogBinding: DialogAdvancedFiltersBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -59,18 +57,19 @@ class HomeFragment : Fragment() {
         adapter = CharactersAdapter(this::itemClick)
         binding.characterList.adapter = adapter
 
-        viewModel.charactersList.observe(viewLifecycleOwner, Observer<List<Character>>() {
+        viewModel.charactersList.observe(viewLifecycleOwner, {
            adapter.characterItem = it
         })
 
-        viewModel.filterList.observe(viewLifecycleOwner, Observer<List<Character>> {
+        viewModel.filterList.observe(viewLifecycleOwner,{
             adapter.characterItem = it
         })
 
         binding.searchEditText.doOnTextChanged { text, start, before, count ->
             //val searchResult = mutableListOf<Character>()
             viewModel.charactersList.value?.let { safeCharacter ->
-                adapter.characterItem = safeCharacter.filter { character -> character.name.startsWith(text.toString(), true) }
+                adapter.characterItem = safeCharacter.filter { character ->
+                    character.name.startsWith(text.toString(), true) }
             }
         }
     }
@@ -86,18 +85,15 @@ class HomeFragment : Fragment() {
 
         dialogBinding.closeButton.setOnClickListener {
 
-            dialogBinding.speciesInputEditText.setText("")
-            dialogBinding.genderInputEditText.setText("")
-            dialogBinding.statusInputEditText.setText("")
             dialog.dismiss()
         }
 
         dialogBinding.applyButton.setOnClickListener {
             if (viewModel.showingSearchResult){
                 viewModel.showingSearchResult = false
-                viewModel.charactersList.observe(viewLifecycleOwner, Observer<List<Character>>() {
+                viewModel.charactersList.value?.let{
                     adapter.characterItem = it
-                })
+                }
                 dialogBinding.speciesInputEditText.setText("")
                 dialogBinding.genderInputEditText.setText("")
                 dialogBinding.statusInputEditText.setText("")

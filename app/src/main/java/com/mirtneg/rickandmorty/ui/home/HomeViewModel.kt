@@ -14,10 +14,11 @@ class HomeViewModel : ViewModel() {
     val filterList : MutableLiveData<List<Character>> = MutableLiveData<List<Character>>()
     val repository = Repository()
     var showingSearchResult = false
-    get() = field
-    set(value){
-        field=value
-    }
+        get() = field
+        set(value) {
+            field = value
+        }
+
 
     fun getCharacters(){
         repository.apiService.getCharacters()
